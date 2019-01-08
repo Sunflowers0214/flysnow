@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 命名空间 -->
+    <typeAliases>
+        <!-- 部门 -->
+        <typeAlias alias="department" type="com.flysnow.authority.model.Department"/>
+        <!-- 功能 -->
+        <typeAlias alias="function" type="com.flysnow.authority.model.Function"/>
+        <!-- 功能权限 -->
+        <typeAlias alias="functionPermission" type="com.flysnow.authority.model.FunctionPermission"/>
+        <!-- 角色 -->
+        <typeAlias alias="role" type="com.flysnow.authority.model.Role"/>
+        <!-- 角色功能 -->
+        <typeAlias alias="roleFunction" type="com.flysnow.authority.model.RoleFunction"/>
+        <!-- 用户 -->
+        <typeAlias alias="user" type="com.flysnow.authority.model.User"/>
+        <!-- 用户登录权限 -->
+        <typeAlias alias="userPermission" type="com.flysnow.authority.model.UserPermission"/>
+        <!-- 用户角色 -->
+        <typeAlias alias="userRole" type="com.flysnow.authority.model.UserRole"/>
+        <!-- 用户功能 -->
+        <typeAlias alias="userFunction" type="com.flysnow.authority.model.UserFunction"/>
+    </typeAliases>
+
+    <!-- 映射mapper-->
+    <mappers>
+        <!-- 部门 -->
+        <mapper resource="config/mybatis/authority/DepartmentMapper.xml"/>
+        <!-- 功能 -->
+        <mapper resource="config/mybatis/authority/FunctionMapper.xml"/>
+        <!-- 功能权限 -->
+        <mapper resource="config/mybatis/authority/FunctionPermissionMapper.xml"/>
+        <!-- 角色 -->
+        <mapper resource="config/mybatis/authority/RoleMapper.xml"/>
+        <!-- 角色功能 -->
+        <mapper resource="config/mybatis/authority/RoleFunctionMapper.xml"/>
+        <!-- 用户 -->
+        <mapper resource="config/mybatis/authority/UserMapper.xml"/>
+        <!-- 用户登录权限 -->
+        <mapper resource="config/mybatis/authority/UserPermissionMapper.xml"/>
+        <!-- 用户角色 -->
+        <mapper resource="config/mybatis/authority/UserRoleMapper.xml"/>
+        <!-- 用户登录 -->
+        <mapper resource="config/mybatis/authority/LoginMapper.xml"/>
+    </mappers>
+</configuration>

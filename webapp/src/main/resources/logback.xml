@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!-- 定义日志文件 输入位置 -->
+    <property name="log.path" value="../logs"/>
+    <!-- 日志最大的历史 30天 -->
+    <property name="maxHistory" value="30"/>
+
+    <!--springmvc-->
+    <logger name="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" level="ERROR"/>
+    <logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="ERROR"/>
+    <logger name="org.springframework.web.cors.DefaultCorsProcessor" level="ERROR"/>
+    <logger name="org.springframework.web.servlet.DispatcherServlet" level="ERROR"/>
+    <!--mybatis-->
+    <logger name="org.mybatis.spring.transaction.SpringManagedTransaction" level="ERROR"/>
+    <logger name="org.mybatis.spring.SqlSessionUtils" level="ERROR"/>
+    <!--jdbc-->
+    <logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager" level="ERROR"/>
+    <logger name="org.springframework.jdbc.datasource.DataSourceUtils" level="ERROR"/>
+    <!--sql-->
+    <logger name="java.sql.Connection" level="ERROR"/>
+    <logger name="java.sql.Statement"/>
+    <logger name="java.sql.PreparedStatement"/>
+    <logger name="java.sql.ResultSet"/>
+    <!--json-->
+    <logger name="net.sf.json.JSONObject" level="ERROR"/>
+    <!--quartz-->
+    <logger name="org.springframework.scheduling.quartz.LocalDataSourceJobStore" level="ERROR"/>
+    <logger name="org.quartz.impl.jdbcjobstore.StdRowLockSemaphore" level="ERROR"/>
+    <logger name="org.quartz.core.QuartzSchedulerThread" level="ERROR"/>
+    <logger name="org.quartz.plugins.history.LoggingJobHistoryPlugin" level="ERROR"/>
+    <logger name="org.quartz.core.JobRunShell" level="ERROR"/>
+    <logger name="com.bjgoodwill.quartz.quartz.domain.JobRecord"/>
+    <!--wooh-->
+    <logger name="com.wooh.util.json.JsonPropertySetStrategy" level="ERROR"/>
+    <logger name="com.wooh.core.dao"/>
+    <logger name="com.wooh.core.exception" level="ERROR"/>
+    <logger name="com.wooh.common.CoreCommonUtil" level="ERROR"/>
+    <logger name="com.wooh.core.dao.ICoreDao.insertOperatelog" level="ERROR"/>
+    <!--hecsp-->
+    <logger name="com.bjgoodwill"/>
+
+    <!-- 控制台输出日志 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{0}: %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- 文件输出日志 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/hecsplog.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %-5level %logger: %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="DEBUG">
+        <!-- 控制台输出 -->
+        <appender-ref ref="STDOUT"/>
+        <!-- 文件输出 -->
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>

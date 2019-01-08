@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flysnow.demo.dao.BookDao">
+
+	<sql id="BookWhere">
+		<if test="bookId != null">
+            AND a.book_id=#{bookId}
+		</if>
+		<if test="bookName != null">
+            AND a.book_name=#{bookName}
+		</if>
+		<if test="bookNumber != null">
+            AND a.book_number=#{bookNumber}
+		</if>
+	</sql>
+	
+	<sql id="BookModifyWhere">
+		<if test="where.bookId != null">
+            AND book_id=#{where.bookId}
+		</if>
+		<if test="where.bookName != null">
+            AND book_name=#{where.bookName}
+		</if>
+		<if test="where.bookNumber != null">
+            AND book_number=#{where.bookNumber}
+		</if>
+	</sql>
+	
+	<insert id="insertBook" parameterType="book">
+		INSERT INTO demo_book (
+        <trim prefix="" suffixOverrides=",">
+			<if test="bookId != null">
+				book_id,
+			</if>
+			<if test="bookName != null">
+				book_name,
+			</if>
+			<if test="bookNumber != null">
+				book_number,
+			</if>
+		</trim>
+		) VALUES (
+        <trim prefix="" suffixOverrides=",">
+	       	<if test="bookId != null">
+				#{bookId},
+			</if>
+	       	<if test="bookName != null">
+				#{bookName},
+			</if>
+	       	<if test="bookNumber != null">
+				#{bookNumber},
+			</if>
+		</trim>
+		)
+	</insert>
+
+    <delete id="deleteBook" parameterType="book">
+        DELETE FROM demo_book
+        <where>
+            <include refid="BookModifyWhere" />
+        </where>
+    </delete>
+
+    <update id="updateBook" parameterType="book">
+		UPDATE demo_book
+        <set>
+			<if test="bookId != null">
+				book_id=#{bookId},
+			</if>
+			<if test="bookName != null">
+				book_name=#{bookName},
+			</if>
+			<if test="bookNumber != null">
+				book_number=#{bookNumber},
+			</if>
+		</set>
+        <where>
+			<include refid="BookModifyWhere" />
+		</where>
+	</update>
+
+    <!-- 图书表 (单条查询) -->
+    <resultMap id="BookResult" type="book">
+		<result column="book_id" property="bookId"/>
+		<result column="book_name" property="bookName"/>
+		<result column="book_number" property="bookNumber"/>
+    </resultMap>
+    <select id="getBook" resultMap="BookResult" parameterType="book" >
+        SELECT
+			a.book_id,
+			a.book_name,
+			a.book_number
+        FROM demo_book a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="BookWhere" />
+        </trim>
+    </select>
+
+    <!-- 图书表 (列表查询) -->
+    <resultMap id="BookListResult" type="book">
+		<result column="book_id" property="bookId"/>
+		<result column="book_name" property="bookName"/>
+		<result column="book_number" property="bookNumber"/>
+    </resultMap>
+	<select id="getBookList" resultMap="BookListResult" parameterType="book" >
+        SELECT
+			a.book_id,
+			a.book_name,
+			a.book_number
+		FROM demo_book a
+		WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="BookWhere" />
+        </trim>
+	</select>
+
+    <!-- 图书表 (分页查询) -->
+    <resultMap id="BookListPageResult" type="java.util.HashMap">
+		<result column="book_id" property="bookId"/>
+		<result column="book_name" property="bookName"/>
+		<result column="book_number" property="bookNumber"/>
+    </resultMap>
+    <select id="getBookListPage" resultMap="BookListPageResult" parameterType="map" >
+        SELECT
+			a.book_id,
+			a.book_name,
+			a.book_number
+        FROM demo_book a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="BookWhere" />
+        </trim>
+        <if test="pageSort != null">
+            ORDER BY #{pageSort}
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 引入jdbc配置文件 -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc_driverClassName}"/>
+        <property name="url" value="${jdbc_url}"/>
+        <property name="username" value="${jdbc_username}"/>
+        <property name="password" value="${jdbc_password}"/>
+        <property name="maxActive" value="20"/>
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="1"/>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="60000"/>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="3"/>
+        <!-- 自动清除无用连接 -->
+        <property name="removeAbandoned" value="true"/>
+        <!-- 清除无用连接的等待时间 -->
+        <property name="removeAbandonedTimeout" value="180"/>
+        <!-- 连接属性 -->
+        <property name="connectionProperties" value="clientEncoding=UTF-8"/>
+    </bean>
+
+    <!-- druid监控统计bean 对应上文dataSource中的proxyFilters -->
+    <bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+        <property name="slowSqlMillis" value="1000"/>
+        <property name="logSlowSql" value="true"/>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 配置基于注解的声明式事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- 配置日志操作 -->
+    <bean id="operateLogAop" class="com.flysnow.common.base.OperateLogAop"/>
+    <aop:config>
+        <!-- 配置切面 -->
+        <aop:aspect ref="operateLogAop">
+            <!-- 配置切点 -->
+            <aop:pointcut expression="execution(* com.flysnow.*.dao.*.*(..))" id="operateLogPointcut"/>
+            <!--<aop:pointcut expression="execution(* com.flysnow.common.base.BaseDao.*())" id="operateLogPointcut"/>-->
+            <!-- 配置增强类型 增强类里面使用哪个方法作为前置 -->
+            <aop:before method="before" pointcut-ref="operateLogPointcut"/>
+            <aop:after method="after" pointcut-ref="operateLogPointcut"/>
+            <aop:after-returning method="afterreturning" pointcut-ref="operateLogPointcut"/>
+            <aop:after-throwing method="afterthrowing" pointcut-ref="operateLogPointcut"/>
+            <aop:around method="around" pointcut-ref="operateLogPointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

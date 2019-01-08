@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flysnow.demo.dao.AppointmentDao">
+
+	<sql id="AppointmentWhere">
+		<if test="bookId != null">
+            AND a.book_id=#{bookId}
+		</if>
+		<if test="studentId != null">
+            AND a.student_id=#{studentId}
+		</if>
+		<if test="appointTime != null">
+            AND a.appoint_time=#{appointTime}
+		</if>
+	</sql>
+	
+	<sql id="AppointmentModifyWhere">
+		<if test="where.bookId != null">
+            AND book_id=#{where.bookId}
+		</if>
+		<if test="where.studentId != null">
+            AND student_id=#{where.studentId}
+		</if>
+		<if test="where.appointTime != null">
+            AND appoint_time=#{where.appointTime}
+		</if>
+	</sql>
+	
+	<insert id="insertAppointment" parameterType="appointment">
+		INSERT INTO demo_appointment (
+        <trim prefix="" suffixOverrides=",">
+			<if test="bookId != null">
+				book_id,
+			</if>
+			<if test="studentId != null">
+				student_id,
+			</if>
+			<if test="appointTime != null">
+				appoint_time,
+			</if>
+		</trim>
+		) VALUES (
+        <trim prefix="" suffixOverrides=",">
+	       	<if test="bookId != null">
+				#{bookId},
+			</if>
+	       	<if test="studentId != null">
+				#{studentId},
+			</if>
+	       	<if test="appointTime != null">
+				#{appointTime},
+			</if>
+		</trim>
+		)
+	</insert>
+
+    <delete id="deleteAppointment" parameterType="appointment">
+        DELETE FROM demo_appointment
+        <where>
+            <include refid="AppointmentModifyWhere" />
+        </where>
+    </delete>
+
+    <update id="updateAppointment" parameterType="appointment">
+		UPDATE demo_appointment
+        <set>
+			<if test="bookId != null">
+				book_id=#{bookId},
+			</if>
+			<if test="studentId != null">
+				student_id=#{studentId},
+			</if>
+			<if test="appointTime != null">
+				appoint_time=#{appointTime},
+			</if>
+		</set>
+        <where>
+			<include refid="AppointmentModifyWhere" />
+		</where>
+	</update>
+
+    <!-- 预约图书表 (单条查询) -->
+    <resultMap id="AppointmentResult" type="appointment">
+		<result column="book_id" property="bookId"/>
+		<result column="student_id" property="studentId"/>
+		<result column="appoint_time" property="appointTime"/>
+    </resultMap>
+    <select id="getAppointment" resultMap="AppointmentResult" parameterType="appointment" >
+        SELECT
+			a.book_id,
+			a.student_id,
+			a.appoint_time
+        FROM demo_appointment a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="AppointmentWhere" />
+        </trim>
+    </select>
+
+    <!-- 预约图书表 (列表查询) -->
+    <resultMap id="AppointmentListResult" type="appointment">
+		<result column="book_id" property="bookId"/>
+		<result column="student_id" property="studentId"/>
+		<result column="appoint_time" property="appointTime"/>
+    </resultMap>
+	<select id="getAppointmentList" resultMap="AppointmentListResult" parameterType="appointment" >
+        SELECT
+			a.book_id,
+			a.student_id,
+			a.appoint_time
+		FROM demo_appointment a
+		WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="AppointmentWhere" />
+        </trim>
+	</select>
+
+    <!-- 预约图书表 (分页查询) -->
+    <resultMap id="AppointmentListPageResult" type="java.util.HashMap">
+		<result column="book_id" property="bookId"/>
+		<result column="student_id" property="studentId"/>
+		<result column="appoint_time" property="appointTime"/>
+    </resultMap>
+    <select id="getAppointmentListPage" resultMap="AppointmentListPageResult" parameterType="map" >
+        SELECT
+			a.book_id,
+			a.student_id,
+			a.appoint_time
+        FROM demo_appointment a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="AppointmentWhere" />
+        </trim>
+        <if test="pageSort != null">
+            ORDER BY #{pageSort}
+        </if>
+    </select>
+
+</mapper>

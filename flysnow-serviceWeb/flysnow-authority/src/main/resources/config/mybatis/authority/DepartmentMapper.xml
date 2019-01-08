@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flysnow.authority.dao.DepartmentDao">
+
+	<sql id="DepartmentWhere">
+		<if test="departId != null">
+            AND a.depart_id=#{departId}
+		</if>
+		<if test="departCode != null">
+            AND a.depart_code=#{departCode}
+		</if>
+		<if test="departName != null">
+            AND a.depart_name=#{departName}
+		</if>
+		<if test="departOrder != null">
+            AND a.depart_order=#{departOrder}
+		</if>
+		<if test="departSpell != null">
+            AND a.depart_spell=#{departSpell}
+		</if>
+		<if test="departSpellJane != null">
+            AND a.depart_spell_jane=#{departSpellJane}
+		</if>
+		<if test="departLevel != null">
+            AND a.depart_level=#{departLevel}
+		</if>
+		<if test="superDepartId != null">
+            AND a.super_depart_id=#{superDepartId}
+		</if>
+		<if test="isleaf != null">
+            AND a.isleaf=#{isleaf}
+		</if>
+		<if test="departFullCode != null">
+            AND a.depart_full_code=#{departFullCode}
+		</if>
+		<if test="departFullName != null">
+            AND a.depart_full_name=#{departFullName}
+		</if>
+		<if test="departStatus != null">
+            AND a.depart_status=#{departStatus}
+		</if>
+	</sql>
+	
+	<sql id="DepartmentModifyWhere">
+		<if test="where.departId != null">
+            AND depart_id=#{where.departId}
+		</if>
+		<if test="where.departCode != null">
+            AND depart_code=#{where.departCode}
+		</if>
+		<if test="where.departName != null">
+            AND depart_name=#{where.departName}
+		</if>
+		<if test="where.departOrder != null">
+            AND depart_order=#{where.departOrder}
+		</if>
+		<if test="where.departSpell != null">
+            AND depart_spell=#{where.departSpell}
+		</if>
+		<if test="where.departSpellJane != null">
+            AND depart_spell_jane=#{where.departSpellJane}
+		</if>
+		<if test="where.departLevel != null">
+            AND depart_level=#{where.departLevel}
+		</if>
+		<if test="where.superDepartId != null">
+            AND super_depart_id=#{where.superDepartId}
+		</if>
+		<if test="where.isleaf != null">
+            AND isleaf=#{where.isleaf}
+		</if>
+		<if test="where.departFullCode != null">
+            AND depart_full_code=#{where.departFullCode}
+		</if>
+		<if test="where.departFullName != null">
+            AND depart_full_name=#{where.departFullName}
+		</if>
+		<if test="where.departStatus != null">
+            AND depart_status=#{where.departStatus}
+		</if>
+	</sql>
+	
+	<insert id="insertDepartment" parameterType="department">
+		INSERT INTO auth_department (
+        <trim prefix="" suffixOverrides=",">
+			<if test="departId != null">
+				depart_id,
+			</if>
+			<if test="departCode != null">
+				depart_code,
+			</if>
+			<if test="departName != null">
+				depart_name,
+			</if>
+			<if test="departOrder != null">
+				depart_order,
+			</if>
+			<if test="departSpell != null">
+				depart_spell,
+			</if>
+			<if test="departSpellJane != null">
+				depart_spell_jane,
+			</if>
+			<if test="departLevel != null">
+				depart_level,
+			</if>
+			<if test="superDepartId != null">
+				super_depart_id,
+			</if>
+			<if test="isleaf != null">
+				isleaf,
+			</if>
+			<if test="departFullCode != null">
+				depart_full_code,
+			</if>
+			<if test="departFullName != null">
+				depart_full_name,
+			</if>
+			<if test="departStatus != null">
+				depart_status,
+			</if>
+		</trim>
+		) VALUES (
+        <trim prefix="" suffixOverrides=",">
+	       	<if test="departId != null">
+				#{departId},
+			</if>
+	       	<if test="departCode != null">
+				#{departCode},
+			</if>
+	       	<if test="departName != null">
+				#{departName},
+			</if>
+	       	<if test="departOrder != null">
+				#{departOrder},
+			</if>
+	       	<if test="departSpell != null">
+				#{departSpell},
+			</if>
+	       	<if test="departSpellJane != null">
+				#{departSpellJane},
+			</if>
+	       	<if test="departLevel != null">
+				#{departLevel},
+			</if>
+	       	<if test="superDepartId != null">
+				#{superDepartId},
+			</if>
+	       	<if test="isleaf != null">
+				#{isleaf},
+			</if>
+	       	<if test="departFullCode != null">
+				#{departFullCode},
+			</if>
+	       	<if test="departFullName != null">
+				#{departFullName},
+			</if>
+	       	<if test="departStatus != null">
+				#{departStatus},
+			</if>
+		</trim>
+		)
+	</insert>
+
+    <delete id="deleteDepartment" parameterType="department">
+        DELETE FROM auth_department
+        <where>
+            <include refid="DepartmentModifyWhere" />
+        </where>
+    </delete>
+
+    <update id="updateDepartment" parameterType="department">
+		UPDATE auth_department
+        <set>
+			<if test="departId != null">
+				depart_id=#{departId},
+			</if>
+			<if test="departCode != null">
+				depart_code=#{departCode},
+			</if>
+			<if test="departName != null">
+				depart_name=#{departName},
+			</if>
+			<if test="departOrder != null">
+				depart_order=#{departOrder},
+			</if>
+			<if test="departSpell != null">
+				depart_spell=#{departSpell},
+			</if>
+			<if test="departSpellJane != null">
+				depart_spell_jane=#{departSpellJane},
+			</if>
+			<if test="departLevel != null">
+				depart_level=#{departLevel},
+			</if>
+			<if test="superDepartId != null">
+				super_depart_id=#{superDepartId},
+			</if>
+			<if test="isleaf != null">
+				isleaf=#{isleaf},
+			</if>
+			<if test="departFullCode != null">
+				depart_full_code=#{departFullCode},
+			</if>
+			<if test="departFullName != null">
+				depart_full_name=#{departFullName},
+			</if>
+			<if test="departStatus != null">
+				depart_status=#{departStatus},
+			</if>
+		</set>
+        <where>
+			<include refid="DepartmentModifyWhere" />
+		</where>
+	</update>
+
+    <!-- 部门 (单条查询) -->
+    <resultMap id="DepartmentResult" type="department">
+		<result column="depart_id" property="departId"/>
+		<result column="depart_name" property="departName"/>
+		<result column="depart_order" property="departOrder"/>
+		<result column="depart_spell" property="departSpell"/>
+		<result column="depart_spell_jane" property="departSpellJane"/>
+		<result column="depart_level" property="departLevel"/>
+		<result column="super_depart_id" property="superDepartId"/>
+		<result column="isleaf" property="isleaf"/>
+		<result column="depart_full_code" property="departFullCode"/>
+		<result column="depart_full_name" property="departFullName"/>
+		<result column="depart_status" property="departStatus"/>
+    </resultMap>
+    <select id="getDepartment" resultMap="DepartmentResult" parameterType="department" >
+        SELECT
+			a.depart_id,
+			a.depart_name,
+			a.depart_order,
+			a.depart_spell,
+			a.depart_spell_jane,
+			a.depart_level,
+			a.super_depart_id,
+			a.isleaf,
+			a.depart_full_code,
+			a.depart_full_name,
+			a.depart_status
+        FROM auth_department a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="DepartmentWhere" />
+        </trim>
+    </select>
+
+    <!-- 部门 (列表查询) -->
+    <resultMap id="DepartmentListResult" type="department">
+		<result column="depart_id" property="departId"/>
+		<result column="depart_name" property="departName"/>
+		<result column="depart_order" property="departOrder"/>
+		<result column="depart_spell" property="departSpell"/>
+		<result column="depart_spell_jane" property="departSpellJane"/>
+		<result column="depart_level" property="departLevel"/>
+		<result column="super_depart_id" property="superDepartId"/>
+		<result column="isleaf" property="isleaf"/>
+		<result column="depart_full_code" property="departFullCode"/>
+		<result column="depart_full_name" property="departFullName"/>
+		<result column="depart_status" property="departStatus"/>
+    </resultMap>
+	<select id="getDepartmentList" resultMap="DepartmentListResult" parameterType="department" >
+        SELECT
+			a.depart_id,
+			a.depart_name,
+			a.depart_order,
+			a.depart_spell,
+			a.depart_spell_jane,
+			a.depart_level,
+			a.super_depart_id,
+			a.isleaf,
+			a.depart_full_code,
+			a.depart_full_name,
+			a.depart_status
+		FROM auth_department a
+		WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="DepartmentWhere" />
+        </trim>
+	</select>
+
+    <!-- 部门 (分页查询) -->
+    <resultMap id="DepartmentListPageResult" type="java.util.HashMap">
+		<result column="depart_id" property="departId"/>
+		<result column="depart_name" property="departName"/>
+		<result column="depart_order" property="departOrder"/>
+		<result column="depart_spell" property="departSpell"/>
+		<result column="depart_spell_jane" property="departSpellJane"/>
+		<result column="depart_level" property="departLevel"/>
+		<result column="super_depart_id" property="superDepartId"/>
+		<result column="isleaf" property="isleaf"/>
+		<result column="depart_full_code" property="departFullCode"/>
+		<result column="depart_full_name" property="departFullName"/>
+		<result column="depart_status" property="departStatus"/>
+    </resultMap>
+    <select id="getDepartmentListPage" resultMap="DepartmentListPageResult" parameterType="map" >
+        SELECT
+			a.depart_id,
+			a.depart_name,
+			a.depart_order,
+			a.depart_spell,
+			a.depart_spell_jane,
+			a.depart_level,
+			a.super_depart_id,
+			a.isleaf,
+			a.depart_full_code,
+			a.depart_full_name,
+			a.depart_status
+        FROM auth_department a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="DepartmentWhere" />
+        </trim>
+        <if test="pageSort != null">
+            ORDER BY #{pageSort}
+        </if>
+    </select>
+
+</mapper>

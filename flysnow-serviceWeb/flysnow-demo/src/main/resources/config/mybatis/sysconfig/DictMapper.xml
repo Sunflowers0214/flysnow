@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flysnow.sysconfig.dao.DictDao">
+
+	<sql id="DictWhere">
+		<if test="dictId != null">
+            AND a.dict_id=#{dictId}
+		</if>
+		<if test="dictCode != null">
+            AND a.dict_code=#{dictCode}
+		</if>
+		<if test="dictName != null">
+            AND a.dict_name=#{dictName}
+		</if>
+		<if test="dictOrder != null">
+            AND a.dict_order=#{dictOrder}
+		</if>
+		<if test="dictSpell != null">
+            AND a.dict_spell=#{dictSpell}
+		</if>
+		<if test="dictSpellJane != null">
+            AND a.dict_spell_jane=#{dictSpellJane}
+		</if>
+		<if test="dictType != null">
+            AND a.dict_type=#{dictType}
+		</if>
+		<if test="dictStatus != null">
+            AND a.dict_status=#{dictStatus}
+		</if>
+	</sql>
+	
+	<sql id="DictModifyWhere">
+		<if test="where.dictId != null">
+            AND dict_id=#{where.dictId}
+		</if>
+		<if test="where.dictCode != null">
+            AND dict_code=#{where.dictCode}
+		</if>
+		<if test="where.dictName != null">
+            AND dict_name=#{where.dictName}
+		</if>
+		<if test="where.dictOrder != null">
+            AND dict_order=#{where.dictOrder}
+		</if>
+		<if test="where.dictSpell != null">
+            AND dict_spell=#{where.dictSpell}
+		</if>
+		<if test="where.dictSpellJane != null">
+            AND dict_spell_jane=#{where.dictSpellJane}
+		</if>
+		<if test="where.dictType != null">
+            AND dict_type=#{where.dictType}
+		</if>
+		<if test="where.dictStatus != null">
+            AND dict_status=#{where.dictStatus}
+		</if>
+	</sql>
+	
+	<insert id="insertDict" parameterType="dict">
+		INSERT INTO auth_dict (
+        <trim prefix="" suffixOverrides=",">
+			<if test="dictId != null">
+				dict_id,
+			</if>
+			<if test="dictCode != null">
+				dict_code,
+			</if>
+			<if test="dictName != null">
+				dict_name,
+			</if>
+			<if test="dictOrder != null">
+				dict_order,
+			</if>
+			<if test="dictSpell != null">
+				dict_spell,
+			</if>
+			<if test="dictSpellJane != null">
+				dict_spell_jane,
+			</if>
+			<if test="dictType != null">
+				dict_type,
+			</if>
+			<if test="dictStatus != null">
+				dict_status,
+			</if>
+		</trim>
+		) VALUES (
+        <trim prefix="" suffixOverrides=",">
+	       	<if test="dictId != null">
+				#{dictId},
+			</if>
+	       	<if test="dictCode != null">
+				#{dictCode},
+			</if>
+	       	<if test="dictName != null">
+				#{dictName},
+			</if>
+	       	<if test="dictOrder != null">
+				#{dictOrder},
+			</if>
+	       	<if test="dictSpell != null">
+				#{dictSpell},
+			</if>
+	       	<if test="dictSpellJane != null">
+				#{dictSpellJane},
+			</if>
+	       	<if test="dictType != null">
+				#{dictType},
+			</if>
+	       	<if test="dictStatus != null">
+				#{dictStatus},
+			</if>
+		</trim>
+		)
+	</insert>
+
+    <delete id="deleteDict" parameterType="dict">
+        DELETE FROM auth_dict
+        <where>
+            <include refid="DictModifyWhere" />
+        </where>
+    </delete>
+
+    <update id="updateDict" parameterType="dict">
+		UPDATE auth_dict
+        <set>
+			<if test="dictId != null">
+				dict_id=#{dictId},
+			</if>
+			<if test="dictCode != null">
+				dict_code=#{dictCode},
+			</if>
+			<if test="dictName != null">
+				dict_name=#{dictName},
+			</if>
+			<if test="dictOrder != null">
+				dict_order=#{dictOrder},
+			</if>
+			<if test="dictSpell != null">
+				dict_spell=#{dictSpell},
+			</if>
+			<if test="dictSpellJane != null">
+				dict_spell_jane=#{dictSpellJane},
+			</if>
+			<if test="dictType != null">
+				dict_type=#{dictType},
+			</if>
+			<if test="dictStatus != null">
+				dict_status=#{dictStatus},
+			</if>
+		</set>
+        <where>
+			<include refid="DictModifyWhere" />
+		</where>
+	</update>
+
+    <!-- 字典 (单条查询) -->
+    <resultMap id="DictResult" type="dict">
+		<result column="dict_id" property="dictId"/>
+		<result column="dict_code" property="dictCode"/>
+		<result column="dict_name" property="dictName"/>
+		<result column="dict_order" property="dictOrder"/>
+		<result column="dict_spell" property="dictSpell"/>
+		<result column="dict_spell_jane" property="dictSpellJane"/>
+		<result column="dict_type" property="dictType"/>
+		<result column="dict_status" property="dictStatus"/>
+    </resultMap>
+    <select id="getDict" resultMap="DictResult" parameterType="dict" >
+        SELECT
+			a.dict_id,
+			a.dict_code,
+			a.dict_name,
+			a.dict_order,
+			a.dict_spell,
+			a.dict_spell_jane,
+			a.dict_type,
+			a.dict_status
+        FROM auth_dict a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="DictWhere" />
+        </trim>
+    </select>
+
+    <!-- 字典 (列表查询) -->
+    <resultMap id="DictListResult" type="dict">
+		<result column="dict_id" property="dictId"/>
+		<result column="dict_code" property="dictCode"/>
+		<result column="dict_name" property="dictName"/>
+		<result column="dict_order" property="dictOrder"/>
+		<result column="dict_spell" property="dictSpell"/>
+		<result column="dict_spell_jane" property="dictSpellJane"/>
+		<result column="dict_type" property="dictType"/>
+		<result column="dict_status" property="dictStatus"/>
+    </resultMap>
+	<select id="getDictList" resultMap="DictListResult" parameterType="dict" >
+        SELECT
+			a.dict_id,
+			a.dict_code,
+			a.dict_name,
+			a.dict_order,
+			a.dict_spell,
+			a.dict_spell_jane,
+			a.dict_type,
+			a.dict_status
+		FROM auth_dict a
+		WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="DictWhere" />
+        </trim>
+	</select>
+
+    <!-- 字典 (分页查询) -->
+    <resultMap id="DictListPageResult" type="java.util.HashMap">
+		<result column="dict_id" property="dictId"/>
+		<result column="dict_code" property="dictCode"/>
+		<result column="dict_name" property="dictName"/>
+		<result column="dict_order" property="dictOrder"/>
+		<result column="dict_spell" property="dictSpell"/>
+		<result column="dict_spell_jane" property="dictSpellJane"/>
+		<result column="dict_type" property="dictType"/>
+		<result column="dict_status" property="dictStatus"/>
+    </resultMap>
+    <select id="getDictListPage" resultMap="DictListPageResult" parameterType="map" >
+        SELECT
+			a.dict_id,
+			a.dict_code,
+			a.dict_name,
+			a.dict_order,
+			a.dict_spell,
+			a.dict_spell_jane,
+			a.dict_type,
+			a.dict_status
+        FROM auth_dict a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="DictWhere" />
+        </trim>
+        <if test="pageSort != null">
+            ORDER BY #{pageSort}
+        </if>
+    </select>
+
+</mapper>

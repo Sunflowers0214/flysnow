@@ -1,0 +1,163 @@
+#userlogin_body {
+    -x-system-font: none;
+    background: #226CC5 url(../image/login/user_all_bg.gif) repeat-x scroll center top;
+    font-family: Arial, "??", Helvetica, sans-serif;
+    font-size: 12px;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 150%;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+#user_login, #user_top, #user_main, #user_bottom, #user_login dl, #user_login dd, #user_top, #user_main, #user_bottom, #user_top ul, #user_main ul, #user_bottom ul, #user_top li, #user_main li, #user_bottom li, form {
+    margin: 0;
+    padding: 0;
+}
+
+#user_login {
+    margin: 0 auto;
+    width: 590px;
+}
+
+#user_top, #user_main, #user_bottom {
+    clear: both;
+}
+
+#user_top li, #user_main li, #user_bottom li {
+    float: left;
+    list-style-type: none;
+}
+
+.user_top_r {
+    background: transparent url(../image/login/user_top_r.gif) no-repeat scroll center top;
+}
+
+.user_top_c {
+    background: transparent url(../image/login/user_top_c.gif) no-repeat scroll center top;
+}
+
+.user_top_l {
+    background: transparent url(../image/login/user_top_l.gif) no-repeat scroll center top;
+}
+
+.user_main_r {
+    background: #BEC5CC url(../image/login/user_main_r.gif) no-repeat scroll center top;
+}
+
+.user_main_c {
+    background: #BEC5CC url(../image/login/user_main_c.gif) no-repeat scroll center top;
+    width: 280px;
+}
+
+.user_main_l {
+    background: #BEC5CC url(../image/login/user_main_l.gif) no-repeat scroll center top;
+}
+
+.user_bottom_r {
+    background: transparent url(../image/login/user_bottom_r.gif) no-repeat scroll center top;
+}
+
+.user_bottom_c {
+    background: transparent url(../image/login/user_bottom_c.gif) no-repeat scroll center top;
+    color: #FFFFFF;
+    line-height: 117px;
+    padding-top: 20px;
+    text-align: right;
+}
+
+.user_bottom_c a {
+    color: yellow;
+    text-decoration: underline;
+}
+
+.user_bottom_c a:hover {
+    color: #CC0000;
+}
+
+.user_bottom_l {
+    background: transparent url(../image/login/user_bottom_l.gif) no-repeat scroll center top;
+}
+
+.user_top_r, .user_main_r, .user_bottom_r {
+    float: left;
+    width: 180px;
+}
+
+user_main_c, .user_top_c, .user_bottom_c {
+    float: left;
+    width: 280px;
+}
+
+.user_top_l, .user_main_l, .user_bottom_l {
+    float: left;
+    width: 129px;
+}
+
+.user_top_r, .user_top_c, .user_top_l {
+    height: 116px;
+}
+
+.user_main_r, .user_main_c, .user_main_l {
+    height: 139px;
+}
+
+.user_main_r {
+    line-height: 139px;
+}
+
+.user_bottom_r, .user_bottom_c, .user_bottom_l {
+    height: 117px;
+}
+
+#panSiteFactory {
+    padding-top: 110px;
+}
+
+.login{
+	
+}
+
+.login li{
+	line-height: 45px;
+	height:45px;
+	overflow:hidden;
+}
+
+
+.login input{
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    height: 30px;
+}
+.login .txt{
+    width: 180px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    border: 0px;
+    color: #999999;
+    background: url(../image/login/txt.gif) no-repeat left center;
+	border-radius: 3px;
+}
+.left{ 
+	line-height: 45px;
+	vertical-align: middle;
+	width: 60px;
+	height:45px;
+	text-align: right;
+	display: -moz-inline-box;
+	display: inline-block;
+	padding-bottom:3px;
+}

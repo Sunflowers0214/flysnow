@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 登录日志 -->
+    <bean id="loginLogDao" class="com.flysnow.logmanage.dao.impl.LoginLogDaoImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactoryLogmanage"/>
+    </bean>
+
+    <!-- 操作日志 -->
+    <bean id="operateLogDao" class="com.flysnow.logmanage.dao.impl.OperateLogDaoImpl">
+        <property name="sqlSessionFactory" ref="sqlSessionFactoryLogmanage"/>
+    </bean>
+
+</beans>

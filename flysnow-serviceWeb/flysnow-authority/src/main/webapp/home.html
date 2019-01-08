@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="js/ajaxJson.js"></script>
+    <script language="javascript">
+        $(function () {
+            syncAjaxJson("login/getLoginFuntion", {}, function (data) {
+                if (data.code != "success") {
+                    $("#msg_span").html(data.msg);
+                } else {
+                    console.log(data.data);
+                    $("#div").html(data.data);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+主页
+<div id="div"></div>
+</body>
+</html>

@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flysnow.sysconfig.dao.ConfigDao">
+
+	<sql id="ConfigWhere">
+		<if test="configId != null">
+            AND a.config_id=#{configId}
+		</if>
+		<if test="configCode != null">
+            AND a.config_code=#{configCode}
+		</if>
+		<if test="configName != null">
+            AND a.config_name=#{configName}
+		</if>
+		<if test="configValue != null">
+            AND a.config_value=#{configValue}
+		</if>
+		<if test="configStatus != null">
+            AND a.config_status=#{configStatus}
+		</if>
+	</sql>
+	
+	<sql id="ConfigModifyWhere">
+		<if test="where.configId != null">
+            AND config_id=#{where.configId}
+		</if>
+		<if test="where.configCode != null">
+            AND config_code=#{where.configCode}
+		</if>
+		<if test="where.configName != null">
+            AND config_name=#{where.configName}
+		</if>
+		<if test="where.configValue != null">
+            AND config_value=#{where.configValue}
+		</if>
+		<if test="where.configStatus != null">
+            AND config_status=#{where.configStatus}
+		</if>
+	</sql>
+	
+	<insert id="insertConfig" parameterType="config">
+		INSERT INTO auth_config (
+        <trim prefix="" suffixOverrides=",">
+			<if test="configId != null">
+				config_id,
+			</if>
+			<if test="configCode != null">
+				config_code,
+			</if>
+			<if test="configName != null">
+				config_name,
+			</if>
+			<if test="configValue != null">
+				config_value,
+			</if>
+			<if test="configStatus != null">
+				config_status,
+			</if>
+		</trim>
+		) VALUES (
+        <trim prefix="" suffixOverrides=",">
+	       	<if test="configId != null">
+				#{configId},
+			</if>
+	       	<if test="configCode != null">
+				#{configCode},
+			</if>
+	       	<if test="configName != null">
+				#{configName},
+			</if>
+	       	<if test="configValue != null">
+				#{configValue},
+			</if>
+	       	<if test="configStatus != null">
+				#{configStatus},
+			</if>
+		</trim>
+		)
+	</insert>
+
+    <delete id="deleteConfig" parameterType="config">
+        DELETE FROM auth_config
+        <where>
+            <include refid="ConfigModifyWhere" />
+        </where>
+    </delete>
+
+    <update id="updateConfig" parameterType="config">
+		UPDATE auth_config
+        <set>
+			<if test="configId != null">
+				config_id=#{configId},
+			</if>
+			<if test="configCode != null">
+				config_code=#{configCode},
+			</if>
+			<if test="configName != null">
+				config_name=#{configName},
+			</if>
+			<if test="configValue != null">
+				config_value=#{configValue},
+			</if>
+			<if test="configStatus != null">
+				config_status=#{configStatus},
+			</if>
+		</set>
+        <where>
+			<include refid="ConfigModifyWhere" />
+		</where>
+	</update>
+
+    <!-- 全局参数 (单条查询) -->
+    <resultMap id="ConfigResult" type="config">
+		<result column="config_id" property="configId"/>
+		<result column="config_code" property="configCode"/>
+		<result column="config_name" property="configName"/>
+		<result column="config_value" property="configValue"/>
+		<result column="config_status" property="configStatus"/>
+    </resultMap>
+    <select id="getConfig" resultMap="ConfigResult" parameterType="config" >
+        SELECT
+			a.config_id,
+			a.config_code,
+			a.config_name,
+			a.config_value,
+			a.config_status
+        FROM auth_config a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="ConfigWhere" />
+        </trim>
+    </select>
+
+    <!-- 全局参数 (列表查询) -->
+    <resultMap id="ConfigListResult" type="config">
+		<result column="config_id" property="configId"/>
+		<result column="config_code" property="configCode"/>
+		<result column="config_name" property="configName"/>
+		<result column="config_value" property="configValue"/>
+		<result column="config_status" property="configStatus"/>
+    </resultMap>
+	<select id="getConfigList" resultMap="ConfigListResult" parameterType="config" >
+        SELECT
+			a.config_id,
+			a.config_code,
+			a.config_name,
+			a.config_value,
+			a.config_status
+		FROM auth_config a
+		WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="ConfigWhere" />
+        </trim>
+	</select>
+
+    <!-- 全局参数 (分页查询) -->
+    <resultMap id="ConfigListPageResult" type="java.util.HashMap">
+		<result column="config_id" property="configId"/>
+		<result column="config_code" property="configCode"/>
+		<result column="config_name" property="configName"/>
+		<result column="config_value" property="configValue"/>
+		<result column="config_status" property="configStatus"/>
+    </resultMap>
+    <select id="getConfigListPage" resultMap="ConfigListPageResult" parameterType="map" >
+        SELECT
+			a.config_id,
+			a.config_code,
+			a.config_name,
+			a.config_value,
+			a.config_status
+        FROM auth_config a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="ConfigWhere" />
+        </trim>
+        <if test="pageSort != null">
+            ORDER BY #{pageSort}
+        </if>
+    </select>
+
+</mapper>

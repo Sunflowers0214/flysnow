@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 预约图书表 -->
+  	<bean id="appointmentDao" class="com.flysnow.demo.dao.impl.AppointmentDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactoryDemo"/>
+	</bean>
+
+    <!-- 图书表 -->
+  	<bean id="bookDao" class="com.flysnow.demo.dao.impl.BookDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactoryDemo"/>
+	</bean>
+
+</beans>

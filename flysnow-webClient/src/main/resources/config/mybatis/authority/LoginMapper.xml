@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flysnow.authority.dao.LoginDao">
+
+    <!-- 功能 (列表查询) -->
+    <resultMap id="UserFunctionListResult" type="userFunction">
+        <result column="user_id" property="userId"/>
+        <result column="function_id" property="functionId"/>
+        <result column="function_code" property="functionCode"/>
+        <result column="function_name" property="functionName"/>
+        <result column="function_entry" property="functionEntry"/>
+        <result column="function_order" property="functionOrder"/>
+        <result column="super_function_id" property="superFunctionId"/>
+        <result column="function_full_code" property="functionFullCode"/>
+        <result column="function_full_name" property="functionFullName"/>
+        <result column="function_level" property="functionLevel"/>
+        <result column="isleaf" property="isleaf"/>
+    </resultMap>
+    <select id="getUserFunctionListByUserId" resultMap="UserFunctionListResult" parameterType="map">
+        SELECT
+        a.user_id,
+        c.function_id,
+        c.function_code,
+        c.function_name,
+        c.function_entry,
+        c.function_order,
+        c.super_function_id,
+        c.function_full_code,
+        c.function_full_name,
+        c.function_level,
+        c.isleaf
+        FROM auth_user_role a
+        INNER JOIN auth_role_function b on b.role_id = a.role_id
+        INNER JOIN auth_function c on c.function_id = b.function_id
+        WHERE c.function_status = 0
+        AND a.user_id = #{userId}
+        ORDER BY c.function_level,c.function_order
+    </select>
+
+</mapper>

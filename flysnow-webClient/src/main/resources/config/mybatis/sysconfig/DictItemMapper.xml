@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flysnow.sysconfig.dao.DictItemDao">
+
+	<sql id="DictItemWhere">
+		<if test="itemId != null">
+            AND a.item_id=#{itemId}
+		</if>
+		<if test="dictId != null">
+            AND a.dict_id=#{dictId}
+		</if>
+		<if test="itemCode != null">
+            AND a.item_code=#{itemCode}
+		</if>
+		<if test="itemName != null">
+            AND a.item_name=#{itemName}
+		</if>
+		<if test="appendValue != null">
+            AND a.append_value=#{appendValue}
+		</if>
+		<if test="itemOrder != null">
+            AND a.item_order=#{itemOrder}
+		</if>
+		<if test="itemSpell != null">
+            AND a.item_spell=#{itemSpell}
+		</if>
+		<if test="itemSpellJane != null">
+            AND a.item_spell_jane=#{itemSpellJane}
+		</if>
+		<if test="itemLevel != null">
+            AND a.item_level=#{itemLevel}
+		</if>
+		<if test="superItemId != null">
+            AND a.super_item_id=#{superItemId}
+		</if>
+		<if test="isleaf != null">
+            AND a.isleaf=#{isleaf}
+		</if>
+		<if test="itemFullCode != null">
+            AND a.item_full_code=#{itemFullCode}
+		</if>
+		<if test="itemStatus != null">
+            AND a.item_status=#{itemStatus}
+		</if>
+	</sql>
+	
+	<sql id="DictItemModifyWhere">
+		<if test="where.itemId != null">
+            AND item_id=#{where.itemId}
+		</if>
+		<if test="where.dictId != null">
+            AND dict_id=#{where.dictId}
+		</if>
+		<if test="where.itemCode != null">
+            AND item_code=#{where.itemCode}
+		</if>
+		<if test="where.itemName != null">
+            AND item_name=#{where.itemName}
+		</if>
+		<if test="where.appendValue != null">
+            AND append_value=#{where.appendValue}
+		</if>
+		<if test="where.itemOrder != null">
+            AND item_order=#{where.itemOrder}
+		</if>
+		<if test="where.itemSpell != null">
+            AND item_spell=#{where.itemSpell}
+		</if>
+		<if test="where.itemSpellJane != null">
+            AND item_spell_jane=#{where.itemSpellJane}
+		</if>
+		<if test="where.itemLevel != null">
+            AND item_level=#{where.itemLevel}
+		</if>
+		<if test="where.superItemId != null">
+            AND super_item_id=#{where.superItemId}
+		</if>
+		<if test="where.isleaf != null">
+            AND isleaf=#{where.isleaf}
+		</if>
+		<if test="where.itemFullCode != null">
+            AND item_full_code=#{where.itemFullCode}
+		</if>
+		<if test="where.itemStatus != null">
+            AND item_status=#{where.itemStatus}
+		</if>
+	</sql>
+	
+	<insert id="insertDictItem" parameterType="dictItem">
+		INSERT INTO auth_dict_item (
+        <trim prefix="" suffixOverrides=",">
+			<if test="itemId != null">
+				item_id,
+			</if>
+			<if test="dictId != null">
+				dict_id,
+			</if>
+			<if test="itemCode != null">
+				item_code,
+			</if>
+			<if test="itemName != null">
+				item_name,
+			</if>
+			<if test="appendValue != null">
+				append_value,
+			</if>
+			<if test="itemOrder != null">
+				item_order,
+			</if>
+			<if test="itemSpell != null">
+				item_spell,
+			</if>
+			<if test="itemSpellJane != null">
+				item_spell_jane,
+			</if>
+			<if test="itemLevel != null">
+				item_level,
+			</if>
+			<if test="superItemId != null">
+				super_item_id,
+			</if>
+			<if test="isleaf != null">
+				isleaf,
+			</if>
+			<if test="itemFullCode != null">
+				item_full_code,
+			</if>
+			<if test="itemStatus != null">
+				item_status,
+			</if>
+		</trim>
+		) VALUES (
+        <trim prefix="" suffixOverrides=",">
+	       	<if test="itemId != null">
+				#{itemId},
+			</if>
+	       	<if test="dictId != null">
+				#{dictId},
+			</if>
+	       	<if test="itemCode != null">
+				#{itemCode},
+			</if>
+	       	<if test="itemName != null">
+				#{itemName},
+			</if>
+	       	<if test="appendValue != null">
+				#{appendValue},
+			</if>
+	       	<if test="itemOrder != null">
+				#{itemOrder},
+			</if>
+	       	<if test="itemSpell != null">
+				#{itemSpell},
+			</if>
+	       	<if test="itemSpellJane != null">
+				#{itemSpellJane},
+			</if>
+	       	<if test="itemLevel != null">
+				#{itemLevel},
+			</if>
+	       	<if test="superItemId != null">
+				#{superItemId},
+			</if>
+	       	<if test="isleaf != null">
+				#{isleaf},
+			</if>
+	       	<if test="itemFullCode != null">
+				#{itemFullCode},
+			</if>
+	       	<if test="itemStatus != null">
+				#{itemStatus},
+			</if>
+		</trim>
+		)
+	</insert>
+
+    <delete id="deleteDictItem" parameterType="dictItem">
+        DELETE FROM auth_dict_item
+        <where>
+            <include refid="DictItemModifyWhere" />
+        </where>
+    </delete>
+
+    <update id="updateDictItem" parameterType="dictItem">
+		UPDATE auth_dict_item
+        <set>
+			<if test="itemId != null">
+				item_id=#{itemId},
+			</if>
+			<if test="dictId != null">
+				dict_id=#{dictId},
+			</if>
+			<if test="itemCode != null">
+				item_code=#{itemCode},
+			</if>
+			<if test="itemName != null">
+				item_name=#{itemName},
+			</if>
+			<if test="appendValue != null">
+				append_value=#{appendValue},
+			</if>
+			<if test="itemOrder != null">
+				item_order=#{itemOrder},
+			</if>
+			<if test="itemSpell != null">
+				item_spell=#{itemSpell},
+			</if>
+			<if test="itemSpellJane != null">
+				item_spell_jane=#{itemSpellJane},
+			</if>
+			<if test="itemLevel != null">
+				item_level=#{itemLevel},
+			</if>
+			<if test="superItemId != null">
+				super_item_id=#{superItemId},
+			</if>
+			<if test="isleaf != null">
+				isleaf=#{isleaf},
+			</if>
+			<if test="itemFullCode != null">
+				item_full_code=#{itemFullCode},
+			</if>
+			<if test="itemStatus != null">
+				item_status=#{itemStatus},
+			</if>
+		</set>
+        <where>
+			<include refid="DictItemModifyWhere" />
+		</where>
+	</update>
+
+    <!-- 字典选项 (单条查询) -->
+    <resultMap id="DictItemResult" type="dictItem">
+		<result column="item_id" property="itemId"/>
+		<result column="dict_id" property="dictId"/>
+		<result column="item_code" property="itemCode"/>
+		<result column="item_name" property="itemName"/>
+		<result column="append_value" property="appendValue"/>
+		<result column="item_order" property="itemOrder"/>
+		<result column="item_spell" property="itemSpell"/>
+		<result column="item_spell_jane" property="itemSpellJane"/>
+		<result column="item_level" property="itemLevel"/>
+		<result column="super_item_id" property="superItemId"/>
+		<result column="isleaf" property="isleaf"/>
+		<result column="item_full_code" property="itemFullCode"/>
+		<result column="item_status" property="itemStatus"/>
+    </resultMap>
+    <select id="getDictItem" resultMap="DictItemResult" parameterType="dictItem" >
+        SELECT
+			a.item_id,
+			a.dict_id,
+			a.item_code,
+			a.item_name,
+			a.append_value,
+			a.item_order,
+			a.item_spell,
+			a.item_spell_jane,
+			a.item_level,
+			a.super_item_id,
+			a.isleaf,
+			a.item_full_code,
+			a.item_status
+        FROM auth_dict_item a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="DictItemWhere" />
+        </trim>
+    </select>
+
+    <!-- 字典选项 (列表查询) -->
+    <resultMap id="DictItemListResult" type="dictItem">
+		<result column="item_id" property="itemId"/>
+		<result column="dict_id" property="dictId"/>
+		<result column="item_code" property="itemCode"/>
+		<result column="item_name" property="itemName"/>
+		<result column="append_value" property="appendValue"/>
+		<result column="item_order" property="itemOrder"/>
+		<result column="item_spell" property="itemSpell"/>
+		<result column="item_spell_jane" property="itemSpellJane"/>
+		<result column="item_level" property="itemLevel"/>
+		<result column="super_item_id" property="superItemId"/>
+		<result column="isleaf" property="isleaf"/>
+		<result column="item_full_code" property="itemFullCode"/>
+		<result column="item_status" property="itemStatus"/>
+    </resultMap>
+	<select id="getDictItemList" resultMap="DictItemListResult" parameterType="dictItem" >
+        SELECT
+			a.item_id,
+			a.dict_id,
+			a.item_code,
+			a.item_name,
+			a.append_value,
+			a.item_order,
+			a.item_spell,
+			a.item_spell_jane,
+			a.item_level,
+			a.super_item_id,
+			a.isleaf,
+			a.item_full_code,
+			a.item_status
+		FROM auth_dict_item a
+		WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="DictItemWhere" />
+        </trim>
+	</select>
+
+    <!-- 字典选项 (分页查询) -->
+    <resultMap id="DictItemListPageResult" type="java.util.HashMap">
+		<result column="item_id" property="itemId"/>
+		<result column="dict_id" property="dictId"/>
+		<result column="item_code" property="itemCode"/>
+		<result column="item_name" property="itemName"/>
+		<result column="append_value" property="appendValue"/>
+		<result column="item_order" property="itemOrder"/>
+		<result column="item_spell" property="itemSpell"/>
+		<result column="item_spell_jane" property="itemSpellJane"/>
+		<result column="item_level" property="itemLevel"/>
+		<result column="super_item_id" property="superItemId"/>
+		<result column="isleaf" property="isleaf"/>
+		<result column="item_full_code" property="itemFullCode"/>
+		<result column="item_status" property="itemStatus"/>
+    </resultMap>
+    <select id="getDictItemListPage" resultMap="DictItemListPageResult" parameterType="map" >
+        SELECT
+			a.item_id,
+			a.dict_id,
+			a.item_code,
+			a.item_name,
+			a.append_value,
+			a.item_order,
+			a.item_spell,
+			a.item_spell_jane,
+			a.item_level,
+			a.super_item_id,
+			a.isleaf,
+			a.item_full_code,
+			a.item_status
+        FROM auth_dict_item a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="DictItemWhere" />
+        </trim>
+        <if test="pageSort != null">
+            ORDER BY #{pageSort}
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 命名空间 -->
+    <typeAliases>
+        <!-- 登录日志 -->
+        <typeAlias alias="loginLog" type="com.flysnow.logmanage.model.LoginLog"/>
+        <!-- 操作日志 -->
+        <typeAlias alias="operateLog" type="com.flysnow.logmanage.model.OperateLog"/>
+    </typeAliases>
+
+    <!-- 映射mapper-->
+    <mappers>
+        <!-- 登录日志 -->
+        <mapper resource="config/mybatis/logmanage/LoginLogMapper.xml"/>
+        <!-- 操作日志 -->
+        <mapper resource="config/mybatis/logmanage/OperateLogMapper.xml"/>
+    </mappers>
+</configuration>

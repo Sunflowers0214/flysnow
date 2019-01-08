@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flysnow.authority.dao.RoleDao">
+
+	<sql id="RoleWhere">
+		<if test="roleId != null">
+            AND a.role_id=#{roleId}
+		</if>
+		<if test="roleCode != null">
+            AND a.role_code=#{roleCode}
+		</if>
+		<if test="roleName != null">
+            AND a.role_name=#{roleName}
+		</if>
+		<if test="roleDesc != null">
+            AND a.role_desc=#{roleDesc}
+		</if>
+		<if test="roleOrder != null">
+            AND a.role_order=#{roleOrder}
+		</if>
+		<if test="roleSpell != null">
+            AND a.role_spell=#{roleSpell}
+		</if>
+		<if test="roleSpellJane != null">
+            AND a.role_spell_jane=#{roleSpellJane}
+		</if>
+		<if test="roleStatus != null">
+            AND a.role_status=#{roleStatus}
+		</if>
+	</sql>
+	
+	<sql id="RoleModifyWhere">
+		<if test="where.roleId != null">
+            AND role_id=#{where.roleId}
+		</if>
+		<if test="where.roleCode != null">
+            AND role_code=#{where.roleCode}
+		</if>
+		<if test="where.roleName != null">
+            AND role_name=#{where.roleName}
+		</if>
+		<if test="where.roleDesc != null">
+            AND role_desc=#{where.roleDesc}
+		</if>
+		<if test="where.roleOrder != null">
+            AND role_order=#{where.roleOrder}
+		</if>
+		<if test="where.roleSpell != null">
+            AND role_spell=#{where.roleSpell}
+		</if>
+		<if test="where.roleSpellJane != null">
+            AND role_spell_jane=#{where.roleSpellJane}
+		</if>
+		<if test="where.roleStatus != null">
+            AND role_status=#{where.roleStatus}
+		</if>
+	</sql>
+	
+	<insert id="insertRole" parameterType="role">
+		INSERT INTO auth_role (
+        <trim prefix="" suffixOverrides=",">
+			<if test="roleId != null">
+				role_id,
+			</if>
+			<if test="roleCode != null">
+				role_code,
+			</if>
+			<if test="roleName != null">
+				role_name,
+			</if>
+			<if test="roleDesc != null">
+				role_desc,
+			</if>
+			<if test="roleOrder != null">
+				role_order,
+			</if>
+			<if test="roleSpell != null">
+				role_spell,
+			</if>
+			<if test="roleSpellJane != null">
+				role_spell_jane,
+			</if>
+			<if test="roleStatus != null">
+				role_status,
+			</if>
+		</trim>
+		) VALUES (
+        <trim prefix="" suffixOverrides=",">
+	       	<if test="roleId != null">
+				#{roleId},
+			</if>
+	       	<if test="roleCode != null">
+				#{roleCode},
+			</if>
+	       	<if test="roleName != null">
+				#{roleName},
+			</if>
+	       	<if test="roleDesc != null">
+				#{roleDesc},
+			</if>
+	       	<if test="roleOrder != null">
+				#{roleOrder},
+			</if>
+	       	<if test="roleSpell != null">
+				#{roleSpell},
+			</if>
+	       	<if test="roleSpellJane != null">
+				#{roleSpellJane},
+			</if>
+	       	<if test="roleStatus != null">
+				#{roleStatus},
+			</if>
+		</trim>
+		)
+	</insert>
+
+    <delete id="deleteRole" parameterType="role">
+        DELETE FROM auth_role
+        <where>
+            <include refid="RoleModifyWhere" />
+        </where>
+    </delete>
+
+    <update id="updateRole" parameterType="role">
+		UPDATE auth_role
+        <set>
+			<if test="roleId != null">
+				role_id=#{roleId},
+			</if>
+			<if test="roleCode != null">
+				role_code=#{roleCode},
+			</if>
+			<if test="roleName != null">
+				role_name=#{roleName},
+			</if>
+			<if test="roleDesc != null">
+				role_desc=#{roleDesc},
+			</if>
+			<if test="roleOrder != null">
+				role_order=#{roleOrder},
+			</if>
+			<if test="roleSpell != null">
+				role_spell=#{roleSpell},
+			</if>
+			<if test="roleSpellJane != null">
+				role_spell_jane=#{roleSpellJane},
+			</if>
+			<if test="roleStatus != null">
+				role_status=#{roleStatus},
+			</if>
+		</set>
+        <where>
+			<include refid="RoleModifyWhere" />
+		</where>
+	</update>
+
+    <!-- 角色 (单条查询) -->
+    <resultMap id="RoleResult" type="role">
+		<result column="role_id" property="roleId"/>
+		<result column="role_code" property="roleCode"/>
+		<result column="role_name" property="roleName"/>
+		<result column="role_desc" property="roleDesc"/>
+		<result column="role_order" property="roleOrder"/>
+		<result column="role_spell" property="roleSpell"/>
+		<result column="role_spell_jane" property="roleSpellJane"/>
+		<result column="role_status" property="roleStatus"/>
+    </resultMap>
+    <select id="getRole" resultMap="RoleResult" parameterType="role" >
+        SELECT
+			a.role_id,
+			a.role_code,
+			a.role_name,
+			a.role_desc,
+			a.role_order,
+			a.role_spell,
+			a.role_spell_jane,
+			a.role_status
+        FROM auth_role a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="RoleWhere" />
+        </trim>
+    </select>
+
+    <!-- 角色 (列表查询) -->
+    <resultMap id="RoleListResult" type="role">
+		<result column="role_id" property="roleId"/>
+		<result column="role_code" property="roleCode"/>
+		<result column="role_name" property="roleName"/>
+		<result column="role_desc" property="roleDesc"/>
+		<result column="role_order" property="roleOrder"/>
+		<result column="role_spell" property="roleSpell"/>
+		<result column="role_spell_jane" property="roleSpellJane"/>
+		<result column="role_status" property="roleStatus"/>
+    </resultMap>
+	<select id="getRoleList" resultMap="RoleListResult" parameterType="role" >
+        SELECT
+			a.role_id,
+			a.role_code,
+			a.role_name,
+			a.role_desc,
+			a.role_order,
+			a.role_spell,
+			a.role_spell_jane,
+			a.role_status
+		FROM auth_role a
+		WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="RoleWhere" />
+        </trim>
+	</select>
+
+    <!-- 角色 (分页查询) -->
+    <resultMap id="RoleListPageResult" type="java.util.HashMap">
+		<result column="role_id" property="roleId"/>
+		<result column="role_code" property="roleCode"/>
+		<result column="role_name" property="roleName"/>
+		<result column="role_desc" property="roleDesc"/>
+		<result column="role_order" property="roleOrder"/>
+		<result column="role_spell" property="roleSpell"/>
+		<result column="role_spell_jane" property="roleSpellJane"/>
+		<result column="role_status" property="roleStatus"/>
+    </resultMap>
+    <select id="getRoleListPage" resultMap="RoleListPageResult" parameterType="map" >
+        SELECT
+			a.role_id,
+			a.role_code,
+			a.role_name,
+			a.role_desc,
+			a.role_order,
+			a.role_spell,
+			a.role_spell_jane,
+			a.role_status
+        FROM auth_role a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="RoleWhere" />
+        </trim>
+        <if test="pageSort != null">
+            ORDER BY #{pageSort}
+        </if>
+    </select>
+
+</mapper>

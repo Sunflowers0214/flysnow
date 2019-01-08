@@ -1,0 +1,475 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flysnow.authority.dao.UserDao">
+
+    <sql id="UserWhere">
+        <if test="userId != null">
+            AND a.user_id=#{userId}
+        </if>
+        <if test="userCode != null">
+            AND a.user_code=#{userCode}
+        </if>
+        <if test="userName != null">
+            AND a.user_name=#{userName}
+        </if>
+        <if test="departId != null">
+            AND a.depart_id=#{departId}
+        </if>
+        <if test="userAccount != null">
+            AND a.user_account=#{userAccount}
+        </if>
+        <if test="password != null">
+            AND a.password=#{password}
+        </if>
+        <if test="userIdcard != null">
+            AND a.user_idcard=#{userIdcard}
+        </if>
+        <if test="userSex != null">
+            AND a.user_sex=#{userSex}
+        </if>
+        <if test="userBirthday != null">
+            AND a.user_birthday=#{userBirthday}
+        </if>
+        <if test="userAvatar != null">
+            AND a.user_avatar=#{userAvatar}
+        </if>
+        <if test="userPhone != null">
+            AND a.user_phone=#{userPhone}
+        </if>
+        <if test="userAddress != null">
+            AND a.user_address=#{userAddress}
+        </if>
+        <if test="userOrder != null">
+            AND a.user_order=#{userOrder}
+        </if>
+        <if test="userSpell != null">
+            AND a.user_spell=#{userSpell}
+        </if>
+        <if test="userSpellJane != null">
+            AND a.user_spell_jane=#{userSpellJane}
+        </if>
+        <if test="registerDate != null">
+            AND a.register_date=#{registerDate}
+        </if>
+        <if test="validityBegin != null">
+            AND a.validity_begin=#{validityBegin}
+        </if>
+        <if test="validityEnd != null">
+            AND a.validity_end=#{validityEnd}
+        </if>
+        <if test="userStatus != null">
+            AND a.user_status=#{userStatus}
+        </if>
+    </sql>
+
+    <sql id="UserModifyWhere">
+        <if test="where.userId != null">
+            AND user_id=#{where.userId}
+        </if>
+        <if test="where.userCode != null">
+            AND user_code=#{where.userCode}
+        </if>
+        <if test="where.userName != null">
+            AND user_name=#{where.userName}
+        </if>
+        <if test="where.departId != null">
+            AND depart_id=#{where.departId}
+        </if>
+        <if test="where.userAccount != null">
+            AND user_account=#{where.userAccount}
+        </if>
+        <if test="where.password != null">
+            AND password=#{where.password}
+        </if>
+        <if test="where.userIdcard != null">
+            AND user_idcard=#{where.userIdcard}
+        </if>
+        <if test="where.userSex != null">
+            AND user_sex=#{where.userSex}
+        </if>
+        <if test="where.userBirthday != null">
+            AND user_birthday=#{where.userBirthday}
+        </if>
+        <if test="where.userAvatar != null">
+            AND user_avatar=#{where.userAvatar}
+        </if>
+        <if test="where.userPhone != null">
+            AND user_phone=#{where.userPhone}
+        </if>
+        <if test="where.userAddress != null">
+            AND user_address=#{where.userAddress}
+        </if>
+        <if test="where.userOrder != null">
+            AND user_order=#{where.userOrder}
+        </if>
+        <if test="where.userSpell != null">
+            AND user_spell=#{where.userSpell}
+        </if>
+        <if test="where.userSpellJane != null">
+            AND user_spell_jane=#{where.userSpellJane}
+        </if>
+        <if test="where.registerDate != null">
+            AND register_date=#{where.registerDate}
+        </if>
+        <if test="where.validityBegin != null">
+            AND validity_begin=#{where.validityBegin}
+        </if>
+        <if test="where.validityEnd != null">
+            AND validity_end=#{where.validityEnd}
+        </if>
+        <if test="where.userStatus != null">
+            AND user_status=#{where.userStatus}
+        </if>
+    </sql>
+
+    <insert id="insertUser" parameterType="user">
+        INSERT INTO auth_user (
+        <trim prefix="" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userCode != null">
+                user_code,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="departId != null">
+                depart_id,
+            </if>
+            <if test="userAccount != null">
+                user_account,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="userIdcard != null">
+                user_idcard,
+            </if>
+            <if test="userSex != null">
+                user_sex,
+            </if>
+            <if test="userBirthday != null">
+                user_birthday,
+            </if>
+            <if test="userAvatar != null">
+                user_avatar,
+            </if>
+            <if test="userPhone != null">
+                user_phone,
+            </if>
+            <if test="userAddress != null">
+                user_address,
+            </if>
+            <if test="userOrder != null">
+                user_order,
+            </if>
+            <if test="userSpell != null">
+                user_spell,
+            </if>
+            <if test="userSpellJane != null">
+                user_spell_jane,
+            </if>
+            <if test="registerDate != null">
+                register_date,
+            </if>
+            <if test="validityBegin != null">
+                validity_begin,
+            </if>
+            <if test="validityEnd != null">
+                validity_end,
+            </if>
+            <if test="userStatus != null">
+                user_status,
+            </if>
+        </trim>
+        ) VALUES (
+        <trim prefix="" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="userCode != null">
+                #{userCode},
+            </if>
+            <if test="userName != null">
+                #{userName},
+            </if>
+            <if test="departId != null">
+                #{departId},
+            </if>
+            <if test="userAccount != null">
+                #{userAccount},
+            </if>
+            <if test="password != null">
+                #{password},
+            </if>
+            <if test="userIdcard != null">
+                #{userIdcard},
+            </if>
+            <if test="userSex != null">
+                #{userSex},
+            </if>
+            <if test="userBirthday != null">
+                #{userBirthday},
+            </if>
+            <if test="userAvatar != null">
+                #{userAvatar},
+            </if>
+            <if test="userPhone != null">
+                #{userPhone},
+            </if>
+            <if test="userAddress != null">
+                #{userAddress},
+            </if>
+            <if test="userOrder != null">
+                #{userOrder},
+            </if>
+            <if test="userSpell != null">
+                #{userSpell},
+            </if>
+            <if test="userSpellJane != null">
+                #{userSpellJane},
+            </if>
+            <if test="registerDate != null">
+                #{registerDate},
+            </if>
+            <if test="validityBegin != null">
+                #{validityBegin},
+            </if>
+            <if test="validityEnd != null">
+                #{validityEnd},
+            </if>
+            <if test="userStatus != null">
+                #{userStatus},
+            </if>
+        </trim>
+        )
+    </insert>
+
+    <delete id="deleteUser" parameterType="user">
+        DELETE FROM auth_user
+        <where>
+            <include refid="UserModifyWhere"/>
+        </where>
+    </delete>
+
+    <update id="updateUser" parameterType="user">
+        UPDATE auth_user
+        <set>
+            <if test="userId != null">
+                user_id=#{userId},
+            </if>
+            <if test="userCode != null">
+                user_code=#{userCode},
+            </if>
+            <if test="userName != null">
+                user_name=#{userName},
+            </if>
+            <if test="departId != null">
+                depart_id=#{departId},
+            </if>
+            <if test="userAccount != null">
+                user_account=#{userAccount},
+            </if>
+            <if test="password != null">
+                password=#{password},
+            </if>
+            <if test="userIdcard != null">
+                user_idcard=#{userIdcard},
+            </if>
+            <if test="userSex != null">
+                user_sex=#{userSex},
+            </if>
+            <if test="userBirthday != null">
+                user_birthday=#{userBirthday},
+            </if>
+            <if test="userAvatar != null">
+                user_avatar=#{userAvatar},
+            </if>
+            <if test="userPhone != null">
+                user_phone=#{userPhone},
+            </if>
+            <if test="userAddress != null">
+                user_address=#{userAddress},
+            </if>
+            <if test="userOrder != null">
+                user_order=#{userOrder},
+            </if>
+            <if test="userSpell != null">
+                user_spell=#{userSpell},
+            </if>
+            <if test="userSpellJane != null">
+                user_spell_jane=#{userSpellJane},
+            </if>
+            <if test="registerDate != null">
+                register_date=#{registerDate},
+            </if>
+            <if test="validityBegin != null">
+                validity_begin=#{validityBegin},
+            </if>
+            <if test="validityEnd != null">
+                validity_end=#{validityEnd},
+            </if>
+            <if test="userStatus != null">
+                user_status=#{userStatus},
+            </if>
+        </set>
+        <where>
+            <include refid="UserModifyWhere"/>
+        </where>
+    </update>
+
+    <!-- 用户 (单条查询) -->
+    <resultMap id="UserResult" type="user">
+        <result column="user_id" property="userId"/>
+        <result column="user_code" property="userCode"/>
+        <result column="user_name" property="userName"/>
+        <result column="depart_id" property="departId"/>
+        <result column="user_account" property="userAccount"/>
+        <result column="password" property="password"/>
+        <result column="user_idcard" property="userIdcard"/>
+        <result column="user_sex" property="userSex"/>
+        <result column="user_birthday" property="userBirthday"/>
+        <result column="user_avatar" property="userAvatar"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="user_address" property="userAddress"/>
+        <result column="user_order" property="userOrder"/>
+        <result column="user_spell" property="userSpell"/>
+        <result column="user_spell_jane" property="userSpellJane"/>
+        <result column="register_date" property="registerDate"/>
+        <result column="validity_begin" property="validityBegin"/>
+        <result column="validity_end" property="validityEnd"/>
+        <result column="user_status" property="userStatus"/>
+    </resultMap>
+    <select id="getUser" resultMap="UserResult" parameterType="user">
+        SELECT
+        a.user_id,
+        a.user_code,
+        a.user_name,
+        a.depart_id,
+        a.user_account,
+        a.password,
+        a.user_idcard,
+        a.user_sex,
+        a.user_birthday,
+        a.user_avatar,
+        a.user_phone,
+        a.user_address,
+        a.user_order,
+        a.user_spell,
+        a.user_spell_jane,
+        a.register_date,
+        a.validity_begin,
+        a.validity_end,
+        a.user_status
+        FROM auth_user a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="UserWhere"/>
+        </trim>
+    </select>
+
+    <!-- 用户 (列表查询) -->
+    <resultMap id="UserListResult" type="user">
+        <result column="user_id" property="userId"/>
+        <result column="user_code" property="userCode"/>
+        <result column="user_name" property="userName"/>
+        <result column="depart_id" property="departId"/>
+        <result column="user_account" property="userAccount"/>
+        <result column="password" property="password"/>
+        <result column="user_idcard" property="userIdcard"/>
+        <result column="user_sex" property="userSex"/>
+        <result column="user_birthday" property="userBirthday"/>
+        <result column="user_avatar" property="userAvatar"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="user_address" property="userAddress"/>
+        <result column="user_order" property="userOrder"/>
+        <result column="user_spell" property="userSpell"/>
+        <result column="user_spell_jane" property="userSpellJane"/>
+        <result column="register_date" property="registerDate"/>
+        <result column="validity_begin" property="validityBegin"/>
+        <result column="validity_end" property="validityEnd"/>
+        <result column="user_status" property="userStatus"/>
+    </resultMap>
+    <select id="getUserList" resultMap="UserListResult" parameterType="user">
+        SELECT
+        a.user_id,
+        a.user_code,
+        a.user_name,
+        a.depart_id,
+        a.user_account,
+        a.password,
+        a.user_idcard,
+        a.user_sex,
+        a.user_birthday,
+        a.user_avatar,
+        a.user_phone,
+        a.user_address,
+        a.user_order,
+        a.user_spell,
+        a.user_spell_jane,
+        a.register_date,
+        a.validity_begin,
+        a.validity_end,
+        a.user_status
+        FROM auth_user a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="UserWhere"/>
+        </trim>
+    </select>
+
+    <!-- 用户 (分页查询) -->
+    <resultMap id="UserListPageResult" type="java.util.HashMap">
+        <result column="user_id" property="userId"/>
+        <result column="user_code" property="userCode"/>
+        <result column="user_name" property="userName"/>
+        <result column="depart_id" property="departId"/>
+        <result column="user_account" property="userAccount"/>
+        <result column="password" property="password"/>
+        <result column="user_idcard" property="userIdcard"/>
+        <result column="user_sex" property="userSex"/>
+        <result column="user_birthday" property="userBirthday"/>
+        <result column="user_avatar" property="userAvatar"/>
+        <result column="user_phone" property="userPhone"/>
+        <result column="user_address" property="userAddress"/>
+        <result column="user_order" property="userOrder"/>
+        <result column="user_spell" property="userSpell"/>
+        <result column="user_spell_jane" property="userSpellJane"/>
+        <result column="register_date" property="registerDate"/>
+        <result column="validity_begin" property="validityBegin"/>
+        <result column="validity_end" property="validityEnd"/>
+        <result column="user_status" property="userStatus"/>
+    </resultMap>
+    <select id="getUserListPage" resultMap="UserListPageResult" parameterType="map">
+        SELECT
+        a.user_id,
+        a.user_code,
+        a.user_name,
+        a.depart_id,
+        a.user_account,
+        a.password,
+        a.user_idcard,
+        a.user_sex,
+        a.user_birthday,
+        a.user_avatar,
+        a.user_phone,
+        a.user_address,
+        a.user_order,
+        a.user_spell,
+        a.user_spell_jane,
+        a.register_date,
+        a.validity_begin,
+        a.validity_end,
+        a.user_status
+        FROM auth_user a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="UserWhere"/>
+        </trim>
+        <if test="pageSort != null">
+            ORDER BY #{pageSort}
+        </if>
+    </select>
+
+</mapper>

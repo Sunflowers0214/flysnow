@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 全局参数 -->
+    <bean id="configService" class="com.flysnow.sysconfig.service.impl.ConfigServiceImpl">
+        <property name="configDao" ref="configDao"/>
+    </bean>
+
+    <!-- 字典 -->
+    <bean id="dictService" class="com.flysnow.sysconfig.service.impl.DictServiceImpl">
+        <property name="dictDao" ref="dictDao"/>
+    </bean>
+
+    <!-- 字典选项 -->
+    <bean id="dictItemService" class="com.flysnow.sysconfig.service.impl.DictItemServiceImpl">
+        <property name="dictItemDao" ref="dictItemDao"/>
+    </bean>
+
+</beans>
+

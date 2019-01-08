@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.flysnow.authority.dao.FunctionDao">
+
+	<sql id="FunctionWhere">
+		<if test="functionId != null">
+            AND a.function_id=#{functionId}
+		</if>
+		<if test="functionCode != null">
+            AND a.function_code=#{functionCode}
+		</if>
+		<if test="functionName != null">
+            AND a.function_name=#{functionName}
+		</if>
+		<if test="functionEntry != null">
+            AND a.function_entry=#{functionEntry}
+		</if>
+		<if test="functionOrder != null">
+            AND a.function_order=#{functionOrder}
+		</if>
+		<if test="functionSpell != null">
+            AND a.function_spell=#{functionSpell}
+		</if>
+		<if test="functionSpellJane != null">
+            AND a.function_spell_jane=#{functionSpellJane}
+		</if>
+		<if test="superFunctionId != null">
+            AND a.super_function_id=#{superFunctionId}
+		</if>
+		<if test="functionFullCode != null">
+            AND a.function_full_code=#{functionFullCode}
+		</if>
+		<if test="functionFullName != null">
+            AND a.function_full_name=#{functionFullName}
+		</if>
+		<if test="functionLevel != null">
+            AND a.function_level=#{functionLevel}
+		</if>
+		<if test="isleaf != null">
+            AND a.isleaf=#{isleaf}
+		</if>
+		<if test="functionType != null">
+            AND a.function_type=#{functionType}
+		</if>
+		<if test="functionStatus != null">
+            AND a.function_status=#{functionStatus}
+		</if>
+	</sql>
+	
+	<sql id="FunctionModifyWhere">
+		<if test="where.functionId != null">
+            AND function_id=#{where.functionId}
+		</if>
+		<if test="where.functionCode != null">
+            AND function_code=#{where.functionCode}
+		</if>
+		<if test="where.functionName != null">
+            AND function_name=#{where.functionName}
+		</if>
+		<if test="where.functionEntry != null">
+            AND function_entry=#{where.functionEntry}
+		</if>
+		<if test="where.functionOrder != null">
+            AND function_order=#{where.functionOrder}
+		</if>
+		<if test="where.functionSpell != null">
+            AND function_spell=#{where.functionSpell}
+		</if>
+		<if test="where.functionSpellJane != null">
+            AND function_spell_jane=#{where.functionSpellJane}
+		</if>
+		<if test="where.superFunctionId != null">
+            AND super_function_id=#{where.superFunctionId}
+		</if>
+		<if test="where.functionFullCode != null">
+            AND function_full_code=#{where.functionFullCode}
+		</if>
+		<if test="where.functionFullName != null">
+            AND function_full_name=#{where.functionFullName}
+		</if>
+		<if test="where.functionLevel != null">
+            AND function_level=#{where.functionLevel}
+		</if>
+		<if test="where.isleaf != null">
+            AND isleaf=#{where.isleaf}
+		</if>
+		<if test="where.functionType != null">
+            AND function_type=#{where.functionType}
+		</if>
+		<if test="where.functionStatus != null">
+            AND function_status=#{where.functionStatus}
+		</if>
+	</sql>
+	
+	<insert id="insertFunction" parameterType="function">
+		INSERT INTO auth_function (
+        <trim prefix="" suffixOverrides=",">
+			<if test="functionId != null">
+				function_id,
+			</if>
+			<if test="functionCode != null">
+				function_code,
+			</if>
+			<if test="functionName != null">
+				function_name,
+			</if>
+			<if test="functionEntry != null">
+				function_entry,
+			</if>
+			<if test="functionOrder != null">
+				function_order,
+			</if>
+			<if test="functionSpell != null">
+				function_spell,
+			</if>
+			<if test="functionSpellJane != null">
+				function_spell_jane,
+			</if>
+			<if test="superFunctionId != null">
+				super_function_id,
+			</if>
+			<if test="functionFullCode != null">
+				function_full_code,
+			</if>
+			<if test="functionFullName != null">
+				function_full_name,
+			</if>
+			<if test="functionLevel != null">
+				function_level,
+			</if>
+			<if test="isleaf != null">
+				isleaf,
+			</if>
+			<if test="functionType != null">
+				function_type,
+			</if>
+			<if test="functionStatus != null">
+				function_status,
+			</if>
+		</trim>
+		) VALUES (
+        <trim prefix="" suffixOverrides=",">
+	       	<if test="functionId != null">
+				#{functionId},
+			</if>
+	       	<if test="functionCode != null">
+				#{functionCode},
+			</if>
+	       	<if test="functionName != null">
+				#{functionName},
+			</if>
+	       	<if test="functionEntry != null">
+				#{functionEntry},
+			</if>
+	       	<if test="functionOrder != null">
+				#{functionOrder},
+			</if>
+	       	<if test="functionSpell != null">
+				#{functionSpell},
+			</if>
+	       	<if test="functionSpellJane != null">
+				#{functionSpellJane},
+			</if>
+	       	<if test="superFunctionId != null">
+				#{superFunctionId},
+			</if>
+	       	<if test="functionFullCode != null">
+				#{functionFullCode},
+			</if>
+	       	<if test="functionFullName != null">
+				#{functionFullName},
+			</if>
+	       	<if test="functionLevel != null">
+				#{functionLevel},
+			</if>
+	       	<if test="isleaf != null">
+				#{isleaf},
+			</if>
+	       	<if test="functionType != null">
+				#{functionType},
+			</if>
+	       	<if test="functionStatus != null">
+				#{functionStatus},
+			</if>
+		</trim>
+		)
+	</insert>
+
+    <delete id="deleteFunction" parameterType="function">
+        DELETE FROM auth_function
+        <where>
+            <include refid="FunctionModifyWhere" />
+        </where>
+    </delete>
+
+    <update id="updateFunction" parameterType="function">
+		UPDATE auth_function
+        <set>
+			<if test="functionId != null">
+				function_id=#{functionId},
+			</if>
+			<if test="functionCode != null">
+				function_code=#{functionCode},
+			</if>
+			<if test="functionName != null">
+				function_name=#{functionName},
+			</if>
+			<if test="functionEntry != null">
+				function_entry=#{functionEntry},
+			</if>
+			<if test="functionOrder != null">
+				function_order=#{functionOrder},
+			</if>
+			<if test="functionSpell != null">
+				function_spell=#{functionSpell},
+			</if>
+			<if test="functionSpellJane != null">
+				function_spell_jane=#{functionSpellJane},
+			</if>
+			<if test="superFunctionId != null">
+				super_function_id=#{superFunctionId},
+			</if>
+			<if test="functionFullCode != null">
+				function_full_code=#{functionFullCode},
+			</if>
+			<if test="functionFullName != null">
+				function_full_name=#{functionFullName},
+			</if>
+			<if test="functionLevel != null">
+				function_level=#{functionLevel},
+			</if>
+			<if test="isleaf != null">
+				isleaf=#{isleaf},
+			</if>
+			<if test="functionType != null">
+				function_type=#{functionType},
+			</if>
+			<if test="functionStatus != null">
+				function_status=#{functionStatus},
+			</if>
+		</set>
+        <where>
+			<include refid="FunctionModifyWhere" />
+		</where>
+	</update>
+
+    <!-- 功能 (单条查询) -->
+    <resultMap id="FunctionResult" type="function">
+		<result column="function_id" property="functionId"/>
+		<result column="function_code" property="functionCode"/>
+		<result column="function_name" property="functionName"/>
+		<result column="function_entry" property="functionEntry"/>
+		<result column="function_order" property="functionOrder"/>
+		<result column="function_spell" property="functionSpell"/>
+		<result column="function_spell_jane" property="functionSpellJane"/>
+		<result column="super_function_id" property="superFunctionId"/>
+		<result column="function_full_code" property="functionFullCode"/>
+		<result column="function_full_name" property="functionFullName"/>
+		<result column="function_level" property="functionLevel"/>
+		<result column="isleaf" property="isleaf"/>
+		<result column="function_type" property="functionType"/>
+		<result column="function_status" property="functionStatus"/>
+    </resultMap>
+    <select id="getFunction" resultMap="FunctionResult" parameterType="function" >
+        SELECT
+			a.function_id,
+			a.function_code,
+			a.function_name,
+			a.function_entry,
+			a.function_order,
+			a.function_spell,
+			a.function_spell_jane,
+			a.super_function_id,
+			a.function_full_code,
+			a.function_full_name,
+			a.function_level,
+			a.isleaf,
+			a.function_type,
+			a.function_status
+        FROM auth_function a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="FunctionWhere" />
+        </trim>
+    </select>
+
+    <!-- 功能 (列表查询) -->
+    <resultMap id="FunctionListResult" type="function">
+		<result column="function_id" property="functionId"/>
+		<result column="function_code" property="functionCode"/>
+		<result column="function_name" property="functionName"/>
+		<result column="function_entry" property="functionEntry"/>
+		<result column="function_order" property="functionOrder"/>
+		<result column="function_spell" property="functionSpell"/>
+		<result column="function_spell_jane" property="functionSpellJane"/>
+		<result column="super_function_id" property="superFunctionId"/>
+		<result column="function_full_code" property="functionFullCode"/>
+		<result column="function_full_name" property="functionFullName"/>
+		<result column="function_level" property="functionLevel"/>
+		<result column="isleaf" property="isleaf"/>
+		<result column="function_type" property="functionType"/>
+		<result column="function_status" property="functionStatus"/>
+    </resultMap>
+	<select id="getFunctionList" resultMap="FunctionListResult" parameterType="function" >
+        SELECT
+			a.function_id,
+			a.function_code,
+			a.function_name,
+			a.function_entry,
+			a.function_order,
+			a.function_spell,
+			a.function_spell_jane,
+			a.super_function_id,
+			a.function_full_code,
+			a.function_full_name,
+			a.function_level,
+			a.isleaf,
+			a.function_type,
+			a.function_status
+		FROM auth_function a
+		WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="FunctionWhere" />
+        </trim>
+	</select>
+
+    <!-- 功能 (分页查询) -->
+    <resultMap id="FunctionListPageResult" type="java.util.HashMap">
+		<result column="function_id" property="functionId"/>
+		<result column="function_code" property="functionCode"/>
+		<result column="function_name" property="functionName"/>
+		<result column="function_entry" property="functionEntry"/>
+		<result column="function_order" property="functionOrder"/>
+		<result column="function_spell" property="functionSpell"/>
+		<result column="function_spell_jane" property="functionSpellJane"/>
+		<result column="super_function_id" property="superFunctionId"/>
+		<result column="function_full_code" property="functionFullCode"/>
+		<result column="function_full_name" property="functionFullName"/>
+		<result column="function_level" property="functionLevel"/>
+		<result column="isleaf" property="isleaf"/>
+		<result column="function_type" property="functionType"/>
+		<result column="function_status" property="functionStatus"/>
+    </resultMap>
+    <select id="getFunctionListPage" resultMap="FunctionListPageResult" parameterType="map" >
+        SELECT
+			a.function_id,
+			a.function_code,
+			a.function_name,
+			a.function_entry,
+			a.function_order,
+			a.function_spell,
+			a.function_spell_jane,
+			a.super_function_id,
+			a.function_full_code,
+			a.function_full_name,
+			a.function_level,
+			a.isleaf,
+			a.function_type,
+			a.function_status
+        FROM auth_function a
+        WHERE 1=1
+        <trim prefix="" prefixOverrides="">
+            <include refid="FunctionWhere" />
+        </trim>
+        <if test="pageSort != null">
+            ORDER BY #{pageSort}
+        </if>
+    </select>
+
+</mapper>
