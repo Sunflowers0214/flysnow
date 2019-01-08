@@ -23,21 +23,8 @@
     <logger name="java.sql.ResultSet"/>
     <!--json-->
     <logger name="net.sf.json.JSONObject" level="ERROR"/>
-    <!--quartz-->
-    <logger name="org.springframework.scheduling.quartz.LocalDataSourceJobStore" level="ERROR"/>
-    <logger name="org.quartz.impl.jdbcjobstore.StdRowLockSemaphore" level="ERROR"/>
-    <logger name="org.quartz.core.QuartzSchedulerThread" level="ERROR"/>
-    <logger name="org.quartz.plugins.history.LoggingJobHistoryPlugin" level="ERROR"/>
-    <logger name="org.quartz.core.JobRunShell" level="ERROR"/>
-    <logger name="com.bjgoodwill.quartz.quartz.domain.JobRecord"/>
-    <!--wooh-->
-    <logger name="com.wooh.util.json.JsonPropertySetStrategy" level="ERROR"/>
-    <logger name="com.wooh.core.dao"/>
-    <logger name="com.wooh.core.exception" level="ERROR"/>
-    <logger name="com.wooh.common.CoreCommonUtil" level="ERROR"/>
-    <logger name="com.wooh.core.dao.ICoreDao.insertOperatelog" level="ERROR"/>
-    <!--hecsp-->
-    <logger name="com.bjgoodwill"/>
+    <!--应用-->
+    <logger name="com.flysnow"/>
 
     <!-- 控制台输出日志 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -48,7 +35,7 @@
     <!-- 文件输出日志 -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}/%d{yyyy-MM-dd}/hecsplog.log</fileNamePattern>
+            <fileNamePattern>${log.path}/%d{yyyyMMdd}/log.log</fileNamePattern>
             <maxHistory>${maxHistory}</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -56,10 +43,28 @@
         </encoder>
     </appender>
 
+    <!--输出到数据库的配置 -->
+    <appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+            <driverClass>com.mysql.jdbc.Driver</driverClass>
+            <url>jdbc:mysql://localhost:3306/comd?characterEncoding=utf8</url>
+            <user>root</user>
+            <password>root</password>
+        </connectionSource>
+    </appender>
+
     <root level="DEBUG">
         <!-- 控制台输出 -->
         <appender-ref ref="STDOUT"/>
         <!-- 文件输出 -->
         <appender-ref ref="FILE"/>
+
+        <!--数据库-->
+        <!--<appender-ref ref="DB"/>-->
     </root>
 </configuration>

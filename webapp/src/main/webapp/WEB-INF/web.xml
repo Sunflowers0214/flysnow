@@ -3,57 +3,109 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-    <display-name>hecsp</display-name>
-    
-    <!-- tomcat集群(共享session) -->
-    <!-- <distributable/> -->
-    
-    <!-- 全局参数 -->
+    <display-name>flysnow</display-name>
     <context-param>
         <param-name>webAppRootKey</param-name>
-        <param-value>hecsp.root</param-value>
+        <param-value>flysnow.root</param-value>
     </context-param>
+
+    <!-- 设置Spring容器加载所有的配置文件的路径 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:config/spring/*.xml</param-value>
     </context-param>
 
-    <!--spring 监听器 -->
+    <!-- 加载Spring容器配置 -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    <!-- session超时设置 -->
-    <listener>
-        <listener-class>com.wooh.basicsys.listener.MySessionListener</listener-class>
-    </listener>
-    
-    <servlet-mapping>
-	     <servlet-name>default</servlet-name>
-	     <url-pattern>*.ico</url-pattern>
-	     <url-pattern>*.html</url-pattern>
-	</servlet-mapping>
 
-   <!-- 前端控制器 -->
+    <!--如果你的DispatcherServlet拦截"/"，为了实现REST风格，拦截了所有的请求，那么同时对*.js,*.jpg等静态文件的访问也就被拦截了。-->
+    <!--激活Tomcat的defaultServlet来处理静态文件，要写在DispatcherServlet的前面， 让 defaultServlet先拦截请求，这样请求就不会进入Spring了，我想性能是最好的吧。-->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.html</url-pattern>
+        <url-pattern>/html/*</url-pattern>
+        <url-pattern>/js/*</url-pattern>
+        <url-pattern>/css/*</url-pattern>
+        <url-pattern>/json/*</url-pattern>
+        <url-pattern>/image/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- 配置SpringMVC核心控制器 -->
     <servlet>
-        <servlet-name>springmvc</servlet-name>
+        <servlet-name>springMVC</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!-- 配置初始配置化文件,前面contextConfigLocation看情况二选一 -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:springmvc-servlet.xml</param-value>
+            <param-value>classpath*:config/spring/spring-mvc.xml</param-value>
         </init-param>
+        <!-- 启动加载一次 -->
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>springmvc</servlet-name>
+        <servlet-name>springMVC</servlet-name>
+        <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <!-- session超时设置 -->
+    <!--<listener>
+        <listener-class>com.wooh.basicsys.listener.MySessionListener</listener-class>
+    </listener>-->
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
 
+    <!-- 防止Spring内存溢出监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+
+    <!-- sessionFilter -->
+    <filter>
+        <filter-name>sessionFilter</filter-name>
+        <filter-class>com.flysnow.common.filter.SessionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>sessionFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 解决工程编码过滤器 -->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
     <!-- 默认首页列表 -->
     <welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
+        <welcome-file>login.html</welcome-file>
+        <welcome-file>home.html</welcome-file>
     </welcome-file-list>
+
+    <!-- 错误页面 -->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/500.html</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.html</location>
+    </error-page>
+    
 </web-app>
