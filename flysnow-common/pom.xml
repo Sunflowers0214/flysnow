@@ -27,7 +27,7 @@
         <!--阿里巴巴数据源包-->
         <druid.version>1.0.2</druid.version>
         <!-- 日志文件管理包 -->
-        <slf4j.version>1.7.21</slf4j.version>
+        <slf4j.version>1.7.25</slf4j.version>
         <logback.version>1.2.3</logback.version>
 
         <jackson.core.version>2.8.5</jackson.core.version>

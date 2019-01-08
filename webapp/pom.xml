@@ -32,7 +32,7 @@
 		
 		<dependency>
             <groupId>com.flysnow</groupId>
-            <artifactId>flysnow-client</artifactId>
+            <artifactId>flysnow-webClient</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
